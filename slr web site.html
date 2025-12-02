@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management | SLR Enterprises</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles - Consistent with main site */
+        :root {
+            --primary-color: #1a3a5f;
+            --secondary-color: #e74c3c;
+            --accent-color: #f39c12;
+            --light-bg: #f9f9f9;
+            --dark-text: #2c3e50;
+            --light-text: #7f8c8d;
+            --white: #ffffff;
+            --border-color: #eaeaea;
+            --success-color: #27ae60;
+            --warning-color: #f1c40f;
+            --danger-color: #e74c3c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #219653;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning-color);
+            color: var(--dark-text);
+        }
+        
+        .btn-warning:hover {
+            background-color: #d4ac0d;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 15px auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: -1px;
+        }
+        
+        .logo-accent {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            font-size: 16px;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-icons {
+            display: flex;
+        }
+        
+        .nav-icons a {
+            margin-left: 20px;
+            font-size: 18px;
+            position: relative;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Admin Dashboard */
+        .admin-hero {
+            background: linear-gradient(rgba(26, 58, 95, 0.8), rgba(26, 58, 95, 0.9)), url('https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .admin-hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .admin-hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Admin Dashboard Layout */
+        .admin-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+            min-height: 600px;
+        }
+        
+        .admin-sidebar {
+            background-color: var(--light-bg);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .admin-sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .admin-menu {
+            list-style: none;
+        }
+        
+        .admin-menu li {
+            margin-bottom: 10px;
+        }
+        
+        .admin-menu a {
+            display: block;
+            padding: 10px 15px;
+            border-radius: 4px;
+            color: var(--dark-text);
+            transition: all 0.3s ease;
+        }
+        
+        .admin-menu a:hover, .admin-menu a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .admin-menu i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .admin-content {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .content-header h2 {
+            color: var(--primary-color);
+        }
+        
+        /* Product Upload Form */
+        .upload-form {
+            max-width: 800px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+        
+        .required:after {
+            content: ' *';
+            color: var(--secondary-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-help {
+            font-size: 14px;
+            color: var(--light-text);
+            margin-top: 5px;
+        }
+        
+        /* Image Upload */
+        .image-upload-container {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .image-upload-container:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .image-upload-container.dragover {
+            border-color: var(--accent-color);
+            background-color: rgba(243, 156, 18, 0.05);
+        }
+        
+        .upload-icon {
+            font-size: 48px;
+            color: var(--light-text);
+            margin-bottom: 15px;
+        }
+        
+        .upload-text {
+            margin-bottom: 20px;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .preview-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .preview-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        
+        .preview-remove {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(231, 76, 60, 0.8);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        /* Product List */
+        .product-list {
+            overflow-x: auto;
+        }
+        
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .product-table th {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: left;
+            padding: 15px;
+            font-weight: 600;
+        }
+        
+        .product-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .product-table tr:hover {
+            background-color: var(--light-bg);
+        }
+        
+        .product-image-small {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background-color: rgba(39, 174, 96, 0.1);
+            color: var(--success-color);
+        }
+        
+        .status-draft {
+            background-color: rgba(241, 196, 15, 0.1);
+            color: var(--warning-color);
+        }
+        
+        .status-inactive {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .edit-btn {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+        }
+        
+        .edit-btn:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .delete-btn {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .delete-btn:hover {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: none;
+            background-color: var(--success-color);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .success-message i {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-text);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #bdc3c7;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .admin-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-sidebar {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links, .nav-icons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-hero h1 {
+                font-size: 32px;
+            }
+            
+            .product-table {
+                font-size: 14px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <div class="logo-text">SLR <span class="logo-accent">Enterprises</span></div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="quotation.html">Get Quote</a></li>
+                    <li><a href="admin.html" class="active">Admin</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="#"><i class="fas fa-search"></i></a>
+                    <a href="#"><i class="fas fa-user"></i></a>
+                    <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                </div>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Hero -->
+    <section class="admin-hero">
+        <div class="container">
+            <h1>Product Management</h1>
+            <p>Manage your product catalog, upload new products, and update existing listings.</p>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section>
+        <div class="container">
+            <div class="admin-container">
+                <div class="admin-sidebar">
+                    <h3>Admin Panel</h3>
+                    <ul class="admin-menu">
+                        <li><a href="admin-dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="admin-products.html" class="active"><i class="fas fa-box"></i> Products</a></li>
+                        <li><a href="admin-orders.html"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                        <li><a href="admin-customers.html"><i class="fas fa-users"></i> Customers</a></li>
+                        <li><a href="admin-quotes.html"><i class="fas fa-file-invoice-dollar"></i> Quotes</a></li>
+                        <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                        <li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Back to Site</a></li>
+                    </ul>
+                </div>
+                
+                <div class="admin-content">
+                    <div class="content-header">
+                        <h2>Upload New Product</h2>
+                        <a href="admin-product-list.html" class="btn btn-outline">View All Products</a>
+                    </div>
+                    
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Product Uploaded Successfully!</h3>
+                        <p>Your product has been added to the catalog and is now visible to customers.</p>
+                        <p>Product ID: <strong id="productId">SLR-P-2023-001</strong></p>
+                    </div>
+                    
+                    <form class="upload-form" id="productUploadForm">
+                        <h3 style="margin-bottom: 20px; color: var(--primary-color);">Product Information</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productName" class="required">Product Name</label>
+                                <input type="text" id="productName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productSku" class="required">SKU</label>
+                                <input type="text" id="productSku" class="form-control" required>
+                                <p class="form-help">Unique product identifier</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productDescription" class="required">Description</label>
+                            <textarea id="productDescription" class="form-control" required></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productPrice" class="required">Price ($)</label>
+                                <input type="number" id="productPrice" class="form-control" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productComparePrice">Compare at Price ($)</label>
+                                <input type="number" id="productComparePrice" class="form-control" min="0" step="0.01">
+                                <p class="form-help">Original price for showing discounts</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="productCost" class="required">Cost ($)</label>
+                                <input type="number" id="productCost" class="form-control" min="0" step="0.01" required>
+                                <p class="form-help">Your cost for this product</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="productStock" class="required">Stock Quantity</label>
+                                <input type="number" id="productStock" class="form-control" min="0" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productCategory" class="required">Category</label>
+                            <select id="productCategory" class="form-control" required>
+                                <option value="">Select Category</option>
+                                <option value="grills">Grills</option>
+                                <option value="accessories">Accessories</option>
+                                <option value="parts">Replacement Parts</option>
+                                <option value="tools">Grilling Tools</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productTags">Tags</label>
+                            <input type="text" id="productTags" class="form-control" placeholder="Separate tags with commas">
+                            <p class="form-help">e.g., stainless-steel, portable, professional</p>
+                        </div>
+                        
+                        <h3 style="margin: 40px 0 20px; color: var(--primary-color);">Product Images</h3>
+                        
+                        <div class="image-upload-container" id="imageUploadContainer">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <div class="upload-text">
+                                <p>Drag & drop product images here or</p>
+                            </div>
+                            <label for="fileInput" class="upload-btn">
+                                <i class="fas fa-folder-open"></i> Browse Files
+                            </label>
+                            <input type="file" id="fileInput" class="file-input" multiple accept="image/*">
+                            <p class="form-help">Recommended size: 800x800px. Max file size: 5MB</p>
+                        </div>
+                        
+                        <div class="image-preview" id="imagePreview"></div>
+                        
+                        <h3 style="margin: 40px 0 20px; color: var(--primary-color);">Additional Information</h3>
+                        
+                        <div class="form-group">
+                            <label for="productSpecs">Specifications</label>
+                            <textarea id="productSpecs" class="form-control" placeholder="Key specifications and features"></textarea>
+                            <p class="form-help">Separate each specification with a new line</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productStatus" class="required">Status</label>
+                            <select id="productStatus" class="form-control" required>
+                                <option value="active">Active</option>
+                                <option value="draft">Draft</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="featuredProduct">
+                                <span style="margin-left: 8px;">Feature this product on the homepage</span>
+                            </label>
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px; margin-top: 30px;">
+                            <button type="submit" class="btn btn-success">Save Product</button>
+                            <button type="button" class="btn btn-outline">Save as Draft</button>
+                            <button type="reset" class="btn btn-warning">Reset Form</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SLR Enterprises</h3>
+                    <p>Premium grill designs crafted with precision and innovation for the ultimate outdoor cooking experience.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="quotation.html">Get Quote</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Commerce Street, City, State 12345</li>
+                        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@slrenterprises.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9AM-6PM EST</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 SLR Enterprises. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Image Upload Functionality
+        const fileInput = document.getElementById('fileInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const imageUploadContainer = document.getElementById('imageUploadContainer');
+        let uploadedImages = [];
+        
+        // Drag and drop functionality
+        imageUploadContainer.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+        
+        imageUploadContainer.addEventListener('dragleave', function() {
+            this.classList.remove('dragover');
+        });
+        
+        imageUploadContainer.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+        
+        // File input change
+        fileInput.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+        
+        // Handle uploaded files
+        function handleFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                
+                // Check if file is an image
+                if (!file.type.match('image.*')) {
+                    alert('Please upload only image files.');
+                    continue;
+                }
+                
+                // Check file size (5MB limit)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size exceeds 5MB limit.');
+                    continue;
+                }
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const imageData = {
+                        name: file.name,
+                        url: e.target.result
+                    };
+                    
+                    uploadedImages.push(imageData);
+                    renderImagePreview();
+                };
+                
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // Render image preview
+        function renderImagePreview() {
+            imagePreview.innerHTML = '';
+            
+            uploadedImages.forEach((image, index) => {
+                const previewItem = document.createElement('div');
+                previewItem.className = 'preview-item';
+                
+                previewItem.innerHTML = `
+                    <img src="${image.url}" alt="${image.name}">
+                    <div class="preview-remove" data-index="${index}">
+                        <i class="fas fa-times"></i>
+                    </div>
+                `;
+                
+                imagePreview.appendChild(previewItem);
+            });
+            
+            // Add remove functionality
+            document.querySelectorAll('.preview-remove').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    uploadedImages.splice(index, 1);
+                    renderImagePreview();
+                });
+            });
+        }
+        
+        // Form Submission
+        const productUploadForm = document.getElementById('productUploadForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        productUploadForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Basic validation
+            const productName = document.getElementById('productName').value;
+            const productSku = document.getElementById('productSku').value;
+            const productPrice = document.getElementById('productPrice').value;
+            
+            if (!productName || !productSku || !productPrice) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            if (uploadedImages.length === 0) {
+                if (!confirm('You haven\'t uploaded any product images. Continue anyway?')) {
+                    return;
+                }
+            }
+            
+            // Generate a random product ID
+            const productId = 'SLR-P-2023-' + Math.floor(100 + Math.random() * 900);
+            document.getElementById('productId').textContent = productId;
+            
+            // Show success message
+            successMessage.style.display = 'block';
+            
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+            
+            // In a real application, you would send the form data to a server here
+            console.log('Product data:', {
+                name: productName,
+                sku: productSku,
+                description: document.getElementById('productDescription').value,
+                price: productPrice,
+                comparePrice: document.getElementById('productComparePrice').value,
+                cost: document.getElementById('productCost').value,
+                stock: document.getElementById('productStock').value,
+                category: document.getElementById('productCategory').value,
+                tags: document.getElementById('productTags').value,
+                specs: document.getElementById('productSpecs').value,
+                status: document.getElementById('productStatus').value,
+                featured: document.getElementById('featuredProduct').checked,
+                images: uploadedImages
+            });
+            
+            // Reset form after 5 seconds (for demo purposes)
+            setTimeout(() => {
+                productUploadForm.reset();
+                uploadedImages = [];
+                renderImagePreview();
+                successMessage.style.display = 'none';
+            }, 10000);
+        });
+        
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            const navIcons = document.querySelector('.nav-icons');
+            
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+                navIcons.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navIcons.style.display = 'flex';
+                
+                // Adjust for mobile view
+                if (window.innerWidth <= 768) {
+                    navLinks.style.flexDirection = 'column';
+                    navLinks.style.position = 'absolute';
+                    navLinks.style.top = '100%';
+                    navLinks.style.left = '0';
+                    navLinks.style.right = '0';
+                    navLinks.style.backgroundColor = 'white';
+                    navLinks.style.padding = '20px';
+                    navLinks.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+                    
+                    navIcons.style.flexDirection = 'column';
+                    navIcons.style.position = 'absolute';
+                    navIcons.style.top = 'calc(100% + 200px)';
+                    navIcons.style.left = '0';
+                    navIcons.style.right = '0';
+                    navIcons.style.backgroundColor = 'white';
+                    navIcons.style.padding = '20px';
+                    navIcons.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
